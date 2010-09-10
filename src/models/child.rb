@@ -1,6 +1,6 @@
 require 'active_record'
-require 'sunspot'
-require 'sunspot/rails'
+
+include Sunspot::Rails::Searchable
 
 class Child < ActiveRecord::Base
   belongs_to :parent
