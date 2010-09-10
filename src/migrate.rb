@@ -45,8 +45,7 @@ Sunspot.index(bill)
 Sunspot.commit
 
 logger.debug "Defining Search"
-search = Sunspot.search(Child)
-search.build do
+search = Child.search do
   keywords ['bill']
 end
 
