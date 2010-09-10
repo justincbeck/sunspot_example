@@ -43,8 +43,9 @@ bill = Child.create( :name => 'Bill', :parent => parent )
 Sunspot.index(bill)
 
 logger.debug "Defining Search"
-search = Sunspot.search(Child) do
-  keywords 'bill'
+search = Sunspot.search(Child)
+search.build do
+  keywords ['bill']
 end
 
 logger.debug "Hits: #{search.hits.size}"
