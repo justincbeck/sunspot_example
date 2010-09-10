@@ -38,12 +38,5 @@ search.each_hit_with_result do |hit, child|
   logger.debug child.name
 end
 
-children = Child.find(:all)
-children.each do |child|
-  child.delete
-end
-
-parents = Parent.find(:all)
-parents.each do |parent|
-  parent.delete
-end
+Child.destroy_all
+Parent.destroy_all
