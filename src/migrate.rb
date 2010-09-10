@@ -28,11 +28,11 @@ Sunspot.config.solr.url = 'http://127.0.0.1:8983/solr'
 Sunspot::Adapters::InstanceAdapter.register(Sunspot::Rails::Adapters::ActiveRecordInstanceAdapter, ActiveRecord::Base)
 Sunspot::Adapters::DataAccessor.register(Sunspot::Rails::Adapters::ActiveRecordDataAccessor, ActiveRecord::Base)
 
-Sunspot.setup(Child) do
-  string :name, :stored => true
-  text :name
-  integer :parent_id, :references => Parent
-end
+# Sunspot.setup(Child) do
+#   string :name, :stored => true
+#   text :name
+#   integer :parent_id, :references => Parent
+# end
 
 parent = Parent.create( :name => 'Big Jim')
 
@@ -41,6 +41,8 @@ Sunspot.index(bob)
 
 bill = Child.create( :name => 'Bill', :parent => parent )
 Sunspot.index(bill)
+
+Sunspot.commit
 
 logger.debug "Defining Search"
 search = Sunspot.search(Child)
