@@ -13,8 +13,8 @@ create table parents (
 create table children (
 	id INT(11) not null auto_increment,
 	name VARCHAR(50),
-	-- parent_id INT(11) not null,
-	PRIMARY KEY (id)
-	-- INDEX par_ind (parent_id),
-	-- FOREIGN KEY (parent_id) REFERENCES parents(id)
+	parent_id INT(11) not null,
+	PRIMARY KEY (id),
+	INDEX par_ind (parent_id),
+	FOREIGN KEY (parent_id) REFERENCES parents(id)
 );
