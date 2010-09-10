@@ -6,19 +6,29 @@ require 'sunspot/rails'
 require 'active_record'
 require 'mysql'
 require 'logger'
-require 'models/parent'
-require 'models/child'
 
 logger = Logger.new(STDERR)
 ActiveRecord::Base.logger = logger
 ActiveRecord::Base.colorize_logging = true
-ActiveRecord::Base.establish_connection(:adapter => 'mysql', :host => 'localhost', :database => 'sunspot_test')
+ActiveRecord::Base.establish_connection(:adapter => 'mysql', :host => 'localhost', :database => 'sunspot_example')
 Sunspot::Adapters::InstanceAdapter.register(Sunspot::Rails::Adapters::ActiveRecordInstanceAdapter, ActiveRecord::Base)
 Sunspot::Adapters::DataAccessor.register(Sunspot::Rails::Adapters::ActiveRecordDataAccessor, ActiveRecord::Base)
 
-parent = Parent.create( :name => 'Big Jim')
-Child.create( :name => 'Bob', :parent => parent )
-Child.create( :name => 'Bill', :parent => parent )
+require 'models/parent'
+require 'models/child'
+
+mom = Parent.create( :name => 'Betty Sue')
+dad = Parent.create( :name => 'Jim Bob')
+
+bob = Child.new( :name => 'Bob' )
+bob.parents << mom
+bob.parents << dad
+bob.save
+
+bill = Child.new( :name => 'Bill' )
+bill.parents << mom
+bill.parents << dad
+bill.save
 
 Sunspot.commit
 
